@@ -1,17 +1,29 @@
 import React from 'react'
-import { Route, BrowserRouter as Router, Routes} from 'react-router'
-import UserRoutes from './app/routes/user-routes/user-routes'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import UserRoutes from './app/routes/routes/user-routes'
+import { ToastContainer } from 'react-toastify';
+import useAuthInit from './modules/auth/hooks/useAuthInit';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const App = () => {
+  const { isLoading } = useAuthInit();
+  if (isLoading) {
+    return <div>loading...</div>
+  }
   return (
-    <Router>
-      <Routes>
-        <Route path='/*' element={<UserRoutes />}/>
-        {/* <Route path='/admin' element={}/>
+    <>
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_ID}>
+        <Router>
+          <ToastContainer position='top-center' />
+          <Routes>
+            <Route path='/*' element={<UserRoutes />} />
+            {/* <Route path='/admin' element={}/>
         <Route path='/investor' element={}/>
         <Route path='/vendor' element={}/> */}
-      </Routes>
-    </Router>
+          </Routes>
+        </Router>
+      </GoogleOAuthProvider>
+    </>
   )
 }
 

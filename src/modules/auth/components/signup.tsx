@@ -2,15 +2,19 @@ import { motion } from "framer-motion"
 import { useForm } from "react-hook-form";
 import { user, type userSignupData } from "../validations/signup-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSignup } from "../hooks/useSignup";
+import type { TSignupFormProps } from "../../../shared/types/commonTypes";
 
-const Signup = () => {
+const Signup:React.FC<TSignupFormProps> = ({onSubmit,loading}) => {
+    // const {mutate:signUpUser,isPending:signUpLoading} = useSignup()
     const { register, handleSubmit, formState: { errors } } = useForm<userSignupData>({
         resolver: zodResolver(user)
     })
 
-    const onSubmit = (data: userSignupData) => {
-        console.log("signup data", data)
-    }
+    // const onSubmit = (data: userSignupData) => {
+    //     // console.log("signup data", data)
+    //     signUpUser(data)
+    // }
     return (
         <div className="min-h-screen bg-gray-800 flex items-center justify-center ">
             <motion.div
