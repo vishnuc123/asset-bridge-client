@@ -3,7 +3,6 @@ import Signup from '../components/signup'
 import { useSignup } from '../hooks/useSignup'
 import OtpModal from '../components/otp-modal'
 import { useVerifyOtp } from '../hooks/useVerifyOtp'
-import { da } from 'zod/v4/locales'
 
 const SignupPage = () => {
     const [isOtpModalOpen, setOtpModalOpen] = useState<boolean>(false)

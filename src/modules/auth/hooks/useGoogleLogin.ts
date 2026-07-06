@@ -17,7 +17,7 @@ export const useGoogleLogin = () => {
         onSuccess: (res) => {
             if (res.success) {
                 dispatch(setUser(res.data))
-                navigate("/dashboard")
+                navigate("/user")
                 toast.success("user loginned succesffulyy")
                 
             }

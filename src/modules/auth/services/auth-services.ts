@@ -7,6 +7,8 @@ import type { LoginData } from "../validations/login-schema"
 import axiosInstance from "../../../infrastructure/axios-instance"
 import type { TGoogleLoginValues } from "../types/authTypes"
 
+// v1 remove
+
 export const signUp = async (data:userSignupData) => {
     const res = await axios.post(`${env.SERVER_URL}api/v1/user/signup`,data)
     return res.data
@@ -24,7 +26,7 @@ export const login = async (data:LoginData) => {
 }
 
 export const refreash = async () => {
-    const res = await axiosInstance.get(`${env.SERVER_URL}api/v1/user/me`)
+    const res = await axiosInstance.get(`${env.SERVER_URL}api/v1/user/refresh`)
     console.log("res.data from refreash",res.data)
     return res.data
 }

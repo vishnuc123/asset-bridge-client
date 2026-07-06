@@ -1,15 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { IUser } from "../interface/IUser";
+import type { TRole } from "../../../shared/types/commonTypes";
 
 type TinitialState = {
-    auth: IUser | null,
+    user: IUser | null,
     isAuthenticated: boolean,
     loading:boolean
+    activeRole:TRole
 }
-const initialState = {
+const initialState:TinitialState = {
     user: null,
     isAuthenticated: false,
-    loading:true
+    loading:true,
+    activeRole:"user"
 }
 
 export const authSlice = createSlice({
@@ -22,13 +25,17 @@ export const authSlice = createSlice({
             state.loading=false
 
         },
+        changeRole:(state,action) => {
+            state.activeRole = action.payload.activeRole
+        },
         clearUser: (state) => {
             state.user = null,
-                state.isAuthenticated = false
+            state.isAuthenticated = false
+            state.loading=false
         }
 
     }
 
 })
-export const { setUser, clearUser } = authSlice.actions
+export const { setUser, clearUser,changeRole } = authSlice.actions
 export default authSlice.reducer

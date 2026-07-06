@@ -1,10 +1,12 @@
-import React from 'react'
+import Cards from "../components/cards"
 
 const DashboardInvvestor = () => {
   return (
-    <div>
-      InvestorDashboard
-    </div>
+    <section className="w-full min-h-screen bg-black text-white">
+      <div className="w-full h-[55vh] md:h-[55vh] lg:h-[45vh] overflow-hidden">
+        
+      </div>
+    </section>
   )
 }
 

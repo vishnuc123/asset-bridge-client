@@ -4,17 +4,16 @@ import { user, type userSignupData } from "../validations/signup-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSignup } from "../hooks/useSignup";
 import type { TSignupFormProps } from "../../../shared/types/commonTypes";
+import { useNavigate } from "react-router";
 
-const Signup:React.FC<TSignupFormProps> = ({onSubmit,loading}) => {
+const Signup: React.FC<TSignupFormProps> = ({ onSubmit, loading }) => {
     // const {mutate:signUpUser,isPending:signUpLoading} = useSignup()
+    const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm<userSignupData>({
         resolver: zodResolver(user)
     })
 
-    // const onSubmit = (data: userSignupData) => {
-    //     // console.log("signup data", data)
-    //     signUpUser(data)
-    // }
+   
     return (
         <div className="min-h-screen bg-gray-800 flex items-center justify-center ">
             <motion.div
@@ -35,7 +34,9 @@ const Signup:React.FC<TSignupFormProps> = ({onSubmit,loading}) => {
 
                 {/* RIGHT FORM */}
                 <div className="p-8 md:p-12 flex flex-col justify-center">
+                    <img src="../logo.png" alt="logo" className="mx-auto h-10 w-auto bg-blend-screen" />
                     <div className="flex justify-center pb-5"><h1 className="text-4xl"><strong>Asset Bridge</strong></h1></div>
+
                     <h1 className="text-2xl font-semibold text-gray-800 mb-6">
                         Create Account
                     </h1>
@@ -110,7 +111,9 @@ const Signup:React.FC<TSignupFormProps> = ({onSubmit,loading}) => {
                         {/* LOGIN LINK */}
                         <p className="text-sm text-center text-gray-600">
                             Already have an account?{" "}
-                            <span className="text-purple-600 cursor-pointer hover:underline">
+                            <span
+                                onClick={() => navigate("/login")}
+                                className="text-purple-600 cursor-pointer hover:underline">
                                 Login
                             </span>
                         </p>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router'
 import Navbar from '../../modules/dashboard/components/navbar'
 
-const UserDashboardLayout = () => {
+const UserLayout = () => {
   return (
     <div className='layout-wrapper'>
       {/* navbar */}
@@ -17,4 +17,4 @@ const UserDashboardLayout = () => {
   )
 }
 
-export default UserDashboardLayout
+export default UserLayout

@@ -18,7 +18,7 @@ const OtpModal: React.FC<TOtpModalProps> = ({ onSubmit, onOtpChange, loading }) 
         console.log("joined otp", joinedOtp)
 
         if (joinedOtp.length !== 6) {
-            console.log("please fill all otp")
+            // console.log("please fill all otp")
             toast.error("please fill all otp fields")
             return
         }

@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../../app/store/store'
 import { PiUserSwitchBold } from "react-icons/pi";
-import { useSwtichRole } from '../hooks/useSwitchRole';
+import { useSwitchRole } from '../hooks/useSwitchRole';
 
 const RoleDropDown = () => {
 
@@ -11,8 +11,8 @@ const RoleDropDown = () => {
     const {
         mutate: switchRole,
         isPending: switchRoleLoading,
-        variables // contains current role being sent
-    } = useSwtichRole()
+        variables
+    } = useSwitchRole()
 
     return (
         <div className="relative inline-block group">
@@ -24,35 +24,32 @@ const RoleDropDown = () => {
                 <PiUserSwitchBold />
             </button>
 
-            {/* Dropdown */}
             <div className="absolute left-0 mt-2 w-44 bg-white border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
 
-                {
-                    user?.roles
-                        ?.filter((role) => role !== user?.activeRole)
-                        .map((role) => {
+                {user?.roles?.filter((role) => role !== user?.activeRole)
+                    .map((role) => {
 
-                            const isCurrentLoadingRole =
-                                switchRoleLoading && variables === role
+                        const isCurrentLoadingRole =
+                            switchRoleLoading && variables === role
 
-                            return (
-                                <button
-                                    key={role}
-                                    disabled={switchRoleLoading}
-                                    onClick={() => {
-                                        console.log("Sending role to backend:", role)
-                                        switchRole(role)
-                                    }}
-                                    className="w-full text-left px-4 py-2 hover:bg-gray-200 disabled:opacity-50"
-                                >
-                                    {
-                                        isCurrentLoadingRole
-                                            ? `Switching to ${role}...`
-                                            : `Switch to ${role}`
-                                    }
-                                </button>
-                            )
-                        })
+                        return (
+                            <button
+                                key={role}
+                                disabled={switchRoleLoading}
+                                onClick={() => {
+                                    console.log("Sending role to backend:", role)
+                                    switchRole(role)
+                                }}
+                                className="w-full text-left px-4 py-2 hover:bg-gray-200 disabled:opacity-50"
+                            >
+                                {
+                                    isCurrentLoadingRole
+                                        ? `Switching to ${role}...`
+                                        : `Switch to ${role}`
+                                }
+                            </button>
+                        )
+                    })
                 }
 
             </div>

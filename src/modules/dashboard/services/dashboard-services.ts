@@ -7,6 +7,6 @@ export const logout = async () => {
     return res.data
 }
 export const switchRole = async (role:string) => {
-    const res = await axiosInstance.patch(`${env.SERVER_URL}api/v1/user/switch-role`,{role})
+    const res = await axiosInstance.post(`${env.SERVER_URL}api/v1/user/switch-role`,{role})
     return res.data
 }

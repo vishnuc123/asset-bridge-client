@@ -7,7 +7,7 @@ import { setUser, clearUser } from '../store/auth-slice'
 const useAuthInit = () => {
   const dispatch = useDispatch()
 
-  const { data, isLoading, isSuccess} = useQuery({
+  const { data, isLoading, isSuccess,isError} = useQuery({
     queryKey: ['authUser'],
     queryFn: () => refreash(),
     retry: false,
@@ -20,7 +20,11 @@ const useAuthInit = () => {
 
       dispatch(setUser(data.data))
     }
-  },[data,isSuccess])
+    // if(isError){
+    //   dispatch(clearUser())
+    // }
+    
+  },[data,isSuccess,])
 
   return { isLoading }
 }

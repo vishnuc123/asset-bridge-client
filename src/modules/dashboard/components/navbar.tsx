@@ -5,27 +5,27 @@ import { motion, useScroll, useMotionValueEvent } from "framer-motion"
 import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch, RootState } from '../../../app/store/store';
 import RoleDropDown from './RoleDropDown';
+import NavbarALinks from './NavLinks';
 const Navbar = () => {
     const [settingIsOpen, setSettingIsOpen] = useState(false)
     const [menuIsOpen, setMenuIsOpen] = useState(false)
     const { mutate: logout, isPending: logoutPending } = useLogout()
     const [scrolled, setScrolled] = useState(false)
-    const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
     const user = useSelector((s: RootState) => s.auth)
     console.log("redux state", user)
 
-    const { scrollY } = useScroll()
-    useMotionValueEvent(scrollY, "change", () => {
+    // const { scrollY } = useScroll()
+    // useMotionValueEvent(scrollY, "change", () => {
 
-        setScrolled(true)
-        if (timeoutRef.current !== null) {
-            clearTimeout(timeoutRef.current)
-        }
+    //     setScrolled(true)
+    //     if (timeoutRef.current !== null) {
+    //         clearTimeout(timeoutRef.current)
+    //     }
 
-        timeoutRef.current = setTimeout(() => {
-            setScrolled(false)
-        }, 200);
-    })
+    //     timeoutRef.current = setTimeout(() => {
+    //         setScrolled(false)
+    //     }, 200);
+    // })
 
     return (
         <div className=' h-16 md:h-20  fixed top-5 left-1/2 -translate-x-1/2
@@ -38,7 +38,7 @@ w-[95%] md:w-[90%] lg:w-[80%] flex justify-center items-center backdrop-blur-xl 
                     fixed top-0 left-0 w-full z-50
                     flex items-center justify-between
                     px-10 py-5
-                
+
                     duration-500
 
                     ${scrolled
@@ -52,11 +52,12 @@ w-[95%] md:w-[90%] lg:w-[80%] flex justify-center items-center backdrop-blur-xl 
                     <h1 className='font-bold tracking-tight text-[0px]'>ASSET BRIDGE</h1>
                 </div>
 
-                <ul className='hidden md:flex gap-8 font-medium'>
+                {/* <ul className='hidden md:flex gap-8 font-medium'>
                     <li><a href="#" className="font-medium tracking-tight">Home</a></li>
                     <li><a href="#" className="font-medium tracking-tight">Things To Do</a></li>
                     <li><a href="#" className="font-medium tracking-tight">Events</a></li>
-                </ul>
+                </ul> */}
+                <NavbarALinks />
 
                 <div className="flex gap-2 justify-center items-center">
 

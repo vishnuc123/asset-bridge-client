@@ -17,9 +17,7 @@ const App = () => {
           <ToastContainer position='top-center' />
           <Routes>
             <Route path='/*' element={<UserRoutes />} />
-            {/* <Route path='/admin' element={}/>
-        <Route path='/investor' element={}/>
-        <Route path='/vendor' element={}/> */}
+           
           </Routes>
         </Router>
       </GoogleOAuthProvider>

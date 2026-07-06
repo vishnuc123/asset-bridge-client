@@ -18,7 +18,7 @@ export const useLogin = () => {
             if (res.success) {
 
                 dispatch(setUser(res.data))
-                navigate('/dashboard')
+                navigate('/user')
                 toast.success("user loginned succesffulyy")
             }
         },
