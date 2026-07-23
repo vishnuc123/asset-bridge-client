@@ -45,3 +45,8 @@ export const googleLogin =  async (data:TGoogleLoginValues) => {
     const res = await axiosInstance.post(`${env.SERVER_URL}api/v1/user/google-login`,data)
     return res.data
 }
+
+export const ResendOtp = async (userid:string) => {
+    const res = await axios.post(`${env.SERVER_URL}api/v1/user/resend-otp`,{userid})
+    return res.data
+}

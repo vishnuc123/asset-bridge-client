@@ -1,60 +1,51 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import type { RootState } from '../../../app/store/store'
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { PiUserSwitchBold } from "react-icons/pi";
-import { useSwitchRole } from '../hooks/useSwitchRole';
+
+import type { RootState } from "../../../app/store/store";
+import { useSwitchRole } from "../hooks/useSwitchRole";
 
 const RoleDropDown = () => {
+  // Is the dropdown open?
+  const [open, setOpen] = useState(false);
 
-    const user = useSelector((s: RootState) => s.auth.user)
+  // Get user from Redux
+  const user = useSelector((state: RootState) => state.auth.user);
 
-    const {
-        mutate: switchRole,
-        isPending: switchRoleLoading,
-        variables
-    } = useSwitchRole()
+  // Function to switch roles
+  const { mutate: switchRole } = useSwitchRole();
 
-    return (
-        <div className="relative inline-block group">
+  return (
+    <div className="relative">
+      {/* Button */}
+      <button
+        onClick={() => setOpen(!open)}
+        className="p-2 rounded bg-blue-900 text-white"
+      >
+        <PiUserSwitchBold />
+      </button>
 
-            <button
-                disabled={switchRoleLoading}
-                className="px-4 py-2 bg-blue-950 text-white rounded-lg capitalize disabled:opacity-50"
-            >
-                <PiUserSwitchBold />
-            </button>
-
-            <div className="absolute left-0 mt-2 w-44 bg-white border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
-
-                {user?.roles?.filter((role) => role !== user?.activeRole)
-                    .map((role) => {
-
-                        const isCurrentLoadingRole =
-                            switchRoleLoading && variables === role
-
-                        return (
-                            <button
-                                key={role}
-                                disabled={switchRoleLoading}
-                                onClick={() => {
-                                    console.log("Sending role to backend:", role)
-                                    switchRole(role)
-                                }}
-                                className="w-full text-left px-4 py-2 hover:bg-gray-200 disabled:opacity-50"
-                            >
-                                {
-                                    isCurrentLoadingRole
-                                        ? `Switching to ${role}...`
-                                        : `Switch to ${role}`
-                                }
-                            </button>
-                        )
-                    })
-                }
-
-            </div>
+      {/* Dropdown */}
+      {open && (
+        <div className="absolute right-0 mt-2 w-44 bg-white border rounded shadow">
+          {user?.roles
+            .filter((role) => role !== user.activeRole)
+            .map((role) => (
+              <button
+                key={role}
+                onClick={() => {
+                  switchRole(role); // Call backend
+                  setOpen(false);   // Close dropdown
+                }}
+                className="block w-full text-left px-4 py-2 hover:bg-gray-100 capitalize"
+              >
+                Switch to {role}
+              </button>
+            ))}
         </div>
-    )
-}
+      )}
+    </div>
+  );
+};
 
-export default RoleDropDown
+export default RoleDropDown;

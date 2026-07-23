@@ -50,6 +50,7 @@ import ResetPasswordPage from '../../../modules/auth/pages/reset-page'
 import UserDashboardLayout from '../../layouts/user-layout'
 import VendorDashboardLayout from '../../layouts/vendor-layout'
 import InvestorDashboardLayout from '../../layouts/investor-layout'
+import ProfilePage from '../../../modules/profile/pages/ProfilePage'
 
 const UserRoutes = () => {
 
@@ -88,6 +89,10 @@ const UserRoutes = () => {
             path='/dashboard'
             element={<UserDashboard />}
           />
+          <Route
+            path='/user/profile'
+            element={<ProfilePage/>}
+          />
         </Route>
       </Route>
 
@@ -97,6 +102,10 @@ const UserRoutes = () => {
             path='/vendor'
             element={<VendorDashboard />}
           />
+          <Route
+            path='/vendor/profile'
+            element={<ProfilePage/>}
+          />
         </Route>
       </Route>
 
@@ -105,6 +114,10 @@ const UserRoutes = () => {
           <Route
             path='/investor'
             element={<InvestorDashboard />}
+          />
+          <Route
+            path='/investor/profile'
+            element={<ProfilePage/>}
           />
         </Route>
       </Route>

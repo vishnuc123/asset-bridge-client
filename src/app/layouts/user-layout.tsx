@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router'
-import Navbar from '../../modules/dashboard/components/navbar'
+import Navbar from '../../shared/components/navbar/navbar'
 
 const UserLayout = () => {
   return (

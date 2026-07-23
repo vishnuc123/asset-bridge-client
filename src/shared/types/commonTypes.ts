@@ -24,6 +24,7 @@ export type TOtpData = {
 export type TOtpModalProps = {
   onOtpChange:(otp:string) => void,
   onSubmit:(otp:string) => void,
+  handleResend:() => Promise<void>
   loading:boolean
 }
 export type TRole = "user"|"admin"|"vendor"|"investor"

@@ -1,18 +1,21 @@
 import React, { useDebugValue, useRef, useState } from 'react'
-import { useLogout } from '../hooks/uselogout'
 import { FiMenu, FiX } from "react-icons/fi"; // Added for mobile menu icon toggle
 import { motion, useScroll, useMotionValueEvent } from "framer-motion"
 import { useDispatch, useSelector } from 'react-redux';
-import type { AppDispatch, RootState } from '../../../app/store/store';
-import RoleDropDown from './RoleDropDown';
 import NavbarALinks from './NavLinks';
+import { useNavigate } from 'react-router';
+import { useLogout } from '../../../modules/dashboard/hooks/uselogout';
+import type { RootState } from '../../../app/store/store';
+import RoleDropDown from '../../../modules/dashboard/components/RoleDropDown';
+
 const Navbar = () => {
     const [settingIsOpen, setSettingIsOpen] = useState(false)
     const [menuIsOpen, setMenuIsOpen] = useState(false)
     const { mutate: logout, isPending: logoutPending } = useLogout()
     const [scrolled, setScrolled] = useState(false)
+    const navigate = useNavigate()
     const user = useSelector((s: RootState) => s.auth)
-    console.log("redux state", user)
+    // console.log("redux state", user)
 
     // const { scrollY } = useScroll()
     // useMotionValueEvent(scrollY, "change", () => {
@@ -27,6 +30,12 @@ const Navbar = () => {
     //     }, 200);
     // })
 
+
+    function handleProfileRedirect(){
+        navigate(`/${user.user?.activeRole}/profile`)
+        console.log("user in profile",user);
+        
+    }
     return (
         <div className=' h-16 md:h-20  fixed top-5 left-1/2 -translate-x-1/2
 w-[95%] md:w-[90%] lg:w-[80%] flex justify-center items-center backdrop-blur-xl rounded-full shadow-md z-999'>
@@ -74,13 +83,19 @@ w-[95%] md:w-[90%] lg:w-[80%] flex justify-center items-center backdrop-blur-xl 
                         </button>
 
                         {settingIsOpen && (
-                            <div className="absolute right-0 mt-2 w-40 md:w-48 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden z-[1000]">
+                            <div className="absolute right-0a mt-2 w-40 md:w-48 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden z-[1000]">
+                                <button className='w-full text-left px-4 py-3 hover:bg-gray-100 transition text-sm md:text-base'
+                                onClick={() => handleProfileRedirect()}
+                                >
+                                    Profile
+                                </button>
                                 <button
                                     onClick={() => logout()}
                                     disabled={logoutPending}
                                     className="w-full text-left px-4 py-3 hover:bg-gray-100 transition text-sm md:text-base">
                                     {logoutPending ? 'Logging out...' : 'Logout'}
                                 </button>
+
                             </div>
                         )}
                     </div>

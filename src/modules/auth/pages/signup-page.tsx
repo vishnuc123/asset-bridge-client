@@ -3,6 +3,7 @@ import Signup from '../components/signup'
 import { useSignup } from '../hooks/useSignup'
 import OtpModal from '../components/otp-modal'
 import { useVerifyOtp } from '../hooks/useVerifyOtp'
+import { ResendOtp } from '../services/auth-services'
 
 const SignupPage = () => {
     const [isOtpModalOpen, setOtpModalOpen] = useState<boolean>(false)
@@ -28,10 +29,30 @@ const SignupPage = () => {
         setOtp(data)
     }
 
+    const handleResend = async () => {
+        try {
+            const response = await ResendOtp(userId);
+
+            console.log("resendotp from backend",response);
+
+            // Example response:
+            // {
+            //   success: true,
+            //   message: "OTP sent successfully",
+            //   data: {
+            //      expiryTime: 300
+            //   }
+            // }
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <div>
             <Signup onSubmit={signUpUser} loading={signUpLoading} />
-            {isOtpModalOpen ? <OtpModal onOtpChange={handleOtp} onSubmit={handleVerifyOtp} loading={isOtpLoading} /> : <></>}
+            {isOtpModalOpen ? <OtpModal onOtpChange={handleOtp} onSubmit={handleVerifyOtp} handleResend={handleResend} loading={isOtpLoading} /> : <></>}
 
         </div>
     )

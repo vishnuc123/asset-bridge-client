@@ -1,32 +1,33 @@
 import React, { useState } from "react";
 import type { TOtpModalProps } from "../../../shared/types/commonTypes";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { env } from "../../../shared/constants/env";
+import { ResendOtp } from "../services/auth-services";
 
-const OtpModal: React.FC<TOtpModalProps> = ({ onSubmit, onOtpChange, loading }) => {
-    const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""])
+const OtpModal: React.FC<TOtpModalProps> = ({ onSubmit, onOtpChange,handleResend, loading }) => {
+    const [otp, setOtp] = useState<string>("")
 
-    const handleChange = (value: string, index: number) => {
-        if (!/^[0-9]?$/.test(value)) return;
+    const handleChange = (value: string,) => {
+        if (!/^\d*$/.test(value)) return;
 
-        const newOtp = [...otp];
-        newOtp[index] = value;
-        setOtp(newOtp);
+        if (value.length > 6) return;
+
+        setOtp(value);
+        onOtpChange(value);
     };
 
     const handleVerify = () => {
-        const joinedOtp = otp.join("")
-        console.log("joined otp", joinedOtp)
 
-        if (joinedOtp.length !== 6) {
-            // console.log("please fill all otp")
-            toast.error("please fill all otp fields")
-            return
+        if (otp.length !== 6) {
+            toast.error("Please enter a 6-digit OTP");
+            return;
         }
-        
 
-        onSubmit(joinedOtp)
-        onOtpChange(joinedOtp)
+        onSubmit(otp)
     }
+
+    
 
     return (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
@@ -41,15 +42,15 @@ const OtpModal: React.FC<TOtpModalProps> = ({ onSubmit, onOtpChange, loading }) 
 
                 {/* OTP Inputs */}
                 <div className="flex justify-between gap-2 mb-6">
-                    {[...Array(6)].map((_, i) => (
-                        <input
-                            key={i}
-                            type="text"
-                            maxLength={1}
-                            onChange={(e) => handleChange(e.target.value, i)}
-                            className="w-10 h-12 border rounded-lg text-center text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
-                    ))}
+                    <input
+                        type="text"
+                        value={otp}
+                        onChange={(e) => handleChange(e.target.value)}
+                        maxLength={6}
+                        placeholder="Enter OTP"
+                        className="w-full h-12 border rounded-lg text-center text-lg tracking-[0.5em] focus:outline-none focus:ring-2 focus:ring-blue-500 mb-6"
+                    />
+
                 </div>
 
                 {/* Timer + Resend */}
@@ -60,7 +61,7 @@ const OtpModal: React.FC<TOtpModalProps> = ({ onSubmit, onOtpChange, loading }) 
 
                     <button
                         className="text-blue-600 font-medium hover:underline disabled:text-gray-400"
-                        disabled
+                        onClick={handleResend}
                     >
                         Resend OTP
                     </button>
