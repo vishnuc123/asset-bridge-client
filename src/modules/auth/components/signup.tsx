@@ -2,7 +2,6 @@ import { motion } from "framer-motion"
 import { useForm } from "react-hook-form";
 import { user, type userSignupData } from "../validations/signup-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSignup } from "../hooks/useSignup";
 import type { TSignupFormProps } from "../../../shared/types/commonTypes";
 import { useNavigate } from "react-router";
 

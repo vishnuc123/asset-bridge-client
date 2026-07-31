@@ -1,25 +1,25 @@
 import React from 'react'
 import ProfileForm from '../../../shared/components/profile/Profile'
 import ProfileHeader from '../components/ProfileHeader'
+import PersonalDetailsCard from '../components/PersonalDetailsCard'
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../../app/store/store';
 
 const ProfilePage = () => {
+  const user = useSelector((s:RootState) => s.auth.user)
   return (
-    // <div className='flex'>
-    //   <ProfileHeader />
-    //   <ProfileForm />
-    // </div>
     <div className="flex">
       <div className="hidden md:block md:w-64 min-h-screen bg-yellow-400"></div>
 
-      <div className="flex-1 justify-center">
+      <div className="flex-1">
         <ProfileHeader />
 
-        <div className="p-8">
-          <ProfileForm />
+        <div className="p-8 mt-80">
+          <PersonalDetailsCard  data={user}/>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProfilePage
+export default ProfilePage;

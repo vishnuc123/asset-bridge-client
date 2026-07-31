@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import type { TOtpModalProps } from "../../../shared/types/commonTypes";
 import { toast } from "react-toastify";
-import axios from "axios";
-import { env } from "../../../shared/constants/env";
-import { ResendOtp } from "../services/auth-services";
 
 const OtpModal: React.FC<TOtpModalProps> = ({ onSubmit, onOtpChange,handleResend, loading }) => {
     const [otp, setOtp] = useState<string>("")

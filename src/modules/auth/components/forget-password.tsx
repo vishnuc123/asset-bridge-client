@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
-import { useForgetPassword } from '../hooks/useForgetPassword'
-
+import  { useState } from 'react'
 
 type TforgetPassProps = {
     sendData: (email: string) => void
