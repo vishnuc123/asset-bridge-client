@@ -17,4 +17,8 @@ export interface IUser {
     emailVerified:boolean,
     phoneVerified:boolean
     verificationReason?: string,
+    gender:string,
+    dob:string,
+    nationality:string,
+    address:string
 }
