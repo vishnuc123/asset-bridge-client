@@ -9,7 +9,7 @@ import { setUser } from "../../auth/store/auth-slice"
 export const useUpdateProfile = () => {
     const dispatch = useDispatch<AppDispatch>()
     return useMutation({
-        mutationFn: (value:string) => updateProfile(value),
+        mutationFn: (value:{label:string,field:string,value:string}) => updateProfile(value),
         onSuccess: (res) => {
             console.log("result from update",res)
             dispatch(setUser(res.data))        

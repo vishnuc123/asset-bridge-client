@@ -3,15 +3,16 @@ import { useSelector } from 'react-redux'
 import type { RootState } from '../../../app/store/store'
 import type { IUser } from '../../auth/interface/IUser'
 
-const ProfileHeader = ({ userDetails }: { userDetails: IUser }) => {
+const ProfileHeader = ({ userDetails }: { userDetails: IUser | null }) => {
     // const user = useSelector((s: RootState) => s.auth.user)
     console.log("profileheader:", userDetails)
+    if(!userDetails)return null
     const isProfileIncomplete =
-        !userDetails.firstName?.trim() ||
-        !userDetails.lastName?.trim() ||
-        !userDetails.phone?.trim();
-        !userDetails.profileImage?.trim();
-      
+        !userDetails.address?.trim() ||
+        !userDetails.nationality?.trim() ||
+        !userDetails.gender?.trim();
+    !userDetails.dob?.trim();
+
     return (
         <>
             {/* <div className='bg-yellow-400 w-50 h-screen'></div>
@@ -25,7 +26,7 @@ const ProfileHeader = ({ userDetails }: { userDetails: IUser }) => {
                     {/* <h1 className="text-xl font-bold">{userDetails?.email}</h1> */}
                     <h1 className='text-xl font-bold'>Welcome! {userDetails?.firstName} {userDetails?.lastName}</h1>
                 </div>
-                {userDetails.kycStatus === "pending" || userDetails.kycStatus === "rejected" ? <p className='text-red-600'>Your kyc verification is {userDetails.kycStatus}</p> : <p className='text-yellow-400'>please verify your kyc</p>}
+                {(userDetails.activeRole === "investor" || userDetails.activeRole === "vendor") && (userDetails.kycStatus === "pending" || userDetails.kycStatus === "rejected" ? (<p className="text-red-600">Your KYC verification is {userDetails.kycStatus}.</p>) : userDetails.kycStatus !== "verified" ? (<p className="text-yellow-400">Please verify your KYC.</p>) : null)}
                 {isProfileIncomplete ? (<p className="text-yellow-600">Update Required: Please complete your profile.</p>) : (<p className="text-green-600">Profile Completed</p>)}
             </div>
 

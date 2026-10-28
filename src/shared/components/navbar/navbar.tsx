@@ -31,10 +31,10 @@ const Navbar = () => {
     // })
 
 
-    function handleProfileRedirect(){
+    function handleProfileRedirect() {
         navigate(`/${user.user?.activeRole}/profile`)
-        console.log("user in profile",user);
-        
+        console.log("user in profile", user);
+
     }
     return (
         <div className=' h-16 md:h-20  fixed top-5 left-1/2 -translate-x-1/2
@@ -85,7 +85,7 @@ w-[95%] md:w-[90%] lg:w-[80%] flex justify-center items-center backdrop-blur-xl 
                         {settingIsOpen && (
                             <div className="absolute right-0a mt-2 w-40 md:w-48 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden z-[1000]">
                                 <button className='w-full text-left px-4 py-3 hover:bg-gray-100 transition text-sm md:text-base'
-                                onClick={() => handleProfileRedirect()}
+                                    onClick={() => handleProfileRedirect()}
                                 >
                                     Profile
                                 </button>

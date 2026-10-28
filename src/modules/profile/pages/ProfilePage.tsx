@@ -8,9 +8,11 @@ import Sidebar from '../components/sideBar';
 
 const ProfilePage = () => {
   const user = useSelector((s: RootState) => s.auth.user)
+  console.log("profilepage user",user);
+  
   return (
     <div className="flex">
-      <Sidebar />
+      <Sidebar data={user}/>
 
       <div className="flex-1">
         <ProfileHeader userDetails={user}/>

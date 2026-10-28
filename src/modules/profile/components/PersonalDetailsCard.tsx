@@ -86,26 +86,26 @@ export default function ProfileDetails({
     },
   ];
 
-  const accountDetails: Detail[] = [
-    {
-      label: "Display Name",
-      field: "displayName",
-      value:  "",
-      editable: false,
-    },
-    {
-      label: "Language",
-      field: "language",
-      value: "English",
-      editable: false,
-    },
-    {
-      label: "Time Zone",
-      field: "timezone",
-      value: "Asia/Kolkata",
-      editable: false,
-    },
-  ];
+  // const accountDetails: Detail[] = [
+  //   {
+  //     label: "Display Name",
+  //     field: "displayName",
+  //     value:  "",
+  //     editable: false,
+  //   },
+  //   {
+  //     label: "Language",
+  //     field: "language",
+  //     value: "English",
+  //     editable: false,
+  //   },
+  //   {
+  //     label: "Time Zone",
+  //     field: "timezone",
+  //     value: "Asia/Kolkata",
+  //     editable: false,
+  //   },
+  // ];
 
   const handleEdit = (item: Detail) => {
     setField(item.field);
@@ -264,7 +264,7 @@ export default function ProfileDetails({
     <>
       <div className="grid gap-6 lg:grid-cols-2">
         {renderCard("Personal Details", personalDetails)}
-        {renderCard("Account Details", accountDetails)}
+        {/* {renderCard("Account Details", accountDetails)} */}
       </div>
 
       {open && (
