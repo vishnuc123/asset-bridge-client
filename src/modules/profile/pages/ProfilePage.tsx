@@ -4,16 +4,16 @@ import ProfileHeader from '../components/ProfileHeader'
 import PersonalDetailsCard from '../components/PersonalDetailsCard'
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../../app/store/store';
-import Sidebar from '../components/sideBar';
+import Sidebar from '../components/Sidebar';
 
 const ProfilePage = () => {
   const user = useSelector((s: RootState) => s.auth.user)
   return (
     <div className="flex">
-      <Sidebar />
+      <Sidebar data={user} />
 
       <div className="flex-1">
-        <ProfileHeader userDetails={user}/>
+        <ProfileHeader userDetails={user} />
 
         <div className="p-8 mt-80">
           <PersonalDetailsCard data={user} />

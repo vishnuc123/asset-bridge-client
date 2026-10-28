@@ -3,15 +3,16 @@ import { useSelector } from 'react-redux'
 import type { RootState } from '../../../app/store/store'
 import type { IUser } from '../../auth/interface/IUser'
 
-const ProfileHeader = ({ userDetails }: { userDetails: IUser }) => {
+const ProfileHeader = ({ userDetails }: { userDetails: IUser | null }) => {
     // const user = useSelector((s: RootState) => s.auth.user)
+    if (!userDetails) return null
     console.log("profileheader:", userDetails)
     const isProfileIncomplete =
         !userDetails.firstName?.trim() ||
         !userDetails.lastName?.trim() ||
         !userDetails.phone?.trim();
-        !userDetails.profileImage?.trim();
-      
+    !userDetails.profileImage?.trim();
+
     return (
         <>
             {/* <div className='bg-yellow-400 w-50 h-screen'></div>

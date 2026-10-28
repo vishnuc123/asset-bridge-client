@@ -51,6 +51,7 @@ import UserDashboardLayout from '../../layouts/user-layout'
 import VendorDashboardLayout from '../../layouts/vendor-layout'
 import InvestorDashboardLayout from '../../layouts/investor-layout'
 import ProfilePage from '../../../modules/profile/pages/ProfilePage'
+import KycVerificationPage from '../../../modules/Kyc/pages/KycVerificationPage'
 
 const UserRoutes = () => {
 
@@ -91,7 +92,7 @@ const UserRoutes = () => {
           />
           <Route
             path='/user/profile'
-            element={<ProfilePage/>}
+            element={<ProfilePage />}
           />
         </Route>
       </Route>
@@ -104,7 +105,11 @@ const UserRoutes = () => {
           />
           <Route
             path='/vendor/profile'
-            element={<ProfilePage/>}
+            element={<ProfilePage />}
+          />
+          <Route
+            path='/vendor/profile/kycVerification'
+            element={<KycVerificationPage />}
           />
         </Route>
       </Route>
@@ -117,8 +122,13 @@ const UserRoutes = () => {
           />
           <Route
             path='/investor/profile'
-            element={<ProfilePage/>}
+            element={<ProfilePage />}
           />
+          <Route
+            path='/investor/profile/kycVerification'
+            element={<KycVerificationPage />}
+          />
+
         </Route>
       </Route>
 
