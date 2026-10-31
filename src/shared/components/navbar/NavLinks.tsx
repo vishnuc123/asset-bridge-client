@@ -13,7 +13,7 @@ const NavbarALinks = () => {
     const links = navbarLinks[activeRole]
     return (
         <nav className='flex items-center gap-6'>
-            {links.map((link:string) => (
+            {links.map((link: string) => (
                 <Link key={link.path} to={link.path}
                     className='text-white font-medium hover:text-black transition-colors duration-200'>
                     {link.label}

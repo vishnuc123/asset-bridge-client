@@ -4,15 +4,17 @@ import { user, type userSignupData } from "../validations/signup-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { TSignupFormProps } from "../../../shared/types/commonTypes";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 
 const Signup: React.FC<TSignupFormProps> = ({ onSubmit, loading }) => {
     // const {mutate:signUpUser,isPending:signUpLoading} = useSignup()
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm<userSignupData>({
         resolver: zodResolver(user)
     })
 
-   
+
     return (
         <div className="min-h-screen bg-gray-800 flex items-center justify-center ">
             <motion.div
@@ -76,15 +78,28 @@ const Signup: React.FC<TSignupFormProps> = ({ onSubmit, loading }) => {
                             <p className="text-red-500">{errors.email?.message}</p>
                         </div>
 
+
                         {/* PASSWORD */}
                         <div>
                             <label className="text-sm text-gray-600">Password</label>
-                            <input
-                                {...register("password")}
-                                type="password"
-                                placeholder="Enter password"
-                                className="w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                            />
+
+                            <div className="relative">
+                                <input
+                                    {...register("password")}
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Enter password"
+                                    className="w-full mt-1 px-3 py-2 pr-16 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                />
+
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-purple-600 hover:text-purple-800"
+                                >
+                                    {showPassword ? "Hide" : "Show"}
+                                </button>
+                            </div>
+
                             <p className="text-red-500">{errors.password?.message}</p>
                         </div>
 

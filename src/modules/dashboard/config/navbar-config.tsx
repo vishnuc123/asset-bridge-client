@@ -6,7 +6,7 @@ type TNavbarLink = {
 
 }
 
-export const navbarLinks: Record<Exclude<TRole, "admin">, TNavbarLink[]> = {
+export const navbarLinks: Record<TRole, TNavbarLink[]> = {
   user: [
     {
       label: "Home",
@@ -38,5 +38,10 @@ export const navbarLinks: Record<Exclude<TRole, "admin">, TNavbarLink[]> = {
       label: "Investments",
       path: "/investor/investments"
     }
-  ]
+  ],
+  admin: [
+    { label: "Dashboard", path: "/admin" },
+    { label: "Users", path: "/admin/users" },
+    { label: "KYC Verification", path: "/admin/kyc" },
+  ],
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import type { TLoginFormProps } from '../../../shared/types/commonTypes'
 import { useForm } from 'react-hook-form'
 import { user, type LoginData } from '../validations/login-schema'
@@ -8,6 +8,7 @@ import GoogleLoginBtnComp from './google-btn'
 
 
 const Login: React.FC<TLoginFormProps> = ({ onSubmit, loading }) => {
+    const [showPassword, setShowPassword] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm<LoginData>({ resolver: zodResolver(user) })
 
     return (
@@ -31,19 +32,25 @@ const Login: React.FC<TLoginFormProps> = ({ onSubmit, loading }) => {
                             </div>
                         </div>
 
-                        <div>
-                            <div className="flex items-center justify-between">
-                                <label htmlFor="password" className="block text-sm/6 font-medium text-black">Password</label>
-                                <div className="text-sm">
-                                    <a href="/forgetPassword" className="font-semibold text-indigo-400 hover:text-indigo-300">Forgot password?</a>
-                                </div>
-                            </div>
-                            <div className="mt-2">
-                                <input
-                                    {...register("password")}
-                                    id="password" type="password" name="password" autoComplete="current-password" className="block w-full rounded-md bg-black/5 px-3 py-1.5 text-base text-black outline-1 -outline-offset-1 outline-black/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
-                                <p className="text-red-500">{errors.password?.message}</p>
-                            </div>
+                        <div className="mt-2 relative">
+                            <input
+                                {...register("password")}
+                                id="password"
+                                type={showPassword ? "text" : "password"}
+                                name="password"
+                                autoComplete="current-password"
+                                className="block w-full rounded-md bg-black/5 px-3 py-1.5 pr-16 text-base text-black outline-1 -outline-offset-1 outline-black/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                            />
+
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-indigo-500 hover:text-indigo-700"
+                            >
+                                {showPassword ? "Hide" : "Show"}
+                            </button>
+
+                            <p className="text-red-500">{errors.password?.message}</p>
                         </div>
 
                         <div>

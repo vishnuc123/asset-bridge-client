@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { resetPass, type resetData } from '../validations/reset-schema'
@@ -9,7 +9,8 @@ type TresetPasswordProps = {
 }
 
 const ResetPasswordComp = ({ sendData }: TresetPasswordProps) => {
-
+    const [showPassword, setShowPassword] = useState(false)
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     const {
         register,
         handleSubmit,
@@ -36,38 +37,38 @@ const ResetPasswordComp = ({ sendData }: TresetPasswordProps) => {
                     className='flex flex-col gap-6'
                 >
 
-                    <div>
-                        <label className='text-zinc-300 mb-2 block'>
-                            New Password
-                        </label>
-
+                    <div className="relative">
                         <input
                             {...register("newPassword")}
-                            type="password"
-                            placeholder='Enter new password'
-                            className='w-full h-14 rounded-2xl bg-zinc-800 border border-zinc-700 text-white px-5 outline-none focus:border-indigo-500'
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Enter new password"
+                            className="w-full h-14 rounded-2xl bg-zinc-800 border border-zinc-700 text-white px-5 pr-20 outline-none focus:border-indigo-500"
                         />
 
-                        <p className="text-red-500">
-                            {errors.newPassword?.message}
-                        </p>
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute right-5 top-1/2 -translate-y-1/2 text-sm text-zinc-400 hover:text-white"
+                        >
+                            {showPassword ? "Hide" : "Show"}
+                        </button>
                     </div>
 
-                    <div>
-                        <label className='text-zinc-300 mb-2 block'>
-                            Confirm Password
-                        </label>
-
+                    <div className="relative">
                         <input
                             {...register("confirmPassword")}
-                            type="password"
-                            placeholder='Confirm password'
-                            className='w-full h-14 rounded-2xl bg-zinc-800 border border-zinc-700 text-white px-5 outline-none focus:border-indigo-500'
+                            type={showConfirmPassword ? "text" : "password"}
+                            placeholder="Confirm password"
+                            className="w-full h-14 rounded-2xl bg-zinc-800 border border-zinc-700 text-white px-5 pr-20 outline-none focus:border-indigo-500"
                         />
 
-                        <p className="text-red-500">
-                            {errors.confirmPassword?.message}
-                        </p>
+                        <button
+                            type="button"
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                            className="absolute right-5 top-1/2 -translate-y-1/2 text-sm text-zinc-400 hover:text-white"
+                        >
+                            {showConfirmPassword ? "Hide" : "Show"}
+                        </button>
                     </div>
 
                     <button

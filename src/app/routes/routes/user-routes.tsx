@@ -52,6 +52,9 @@ import VendorDashboardLayout from '../../layouts/vendor-layout'
 import InvestorDashboardLayout from '../../layouts/investor-layout'
 import ProfilePage from '../../../modules/profile/pages/ProfilePage'
 import KycVerificationPage from '../../../modules/Kyc/pages/KycVerificationPage'
+import UserListingPage from '../../../modules/user-management/pages/userListingPage'
+import AdminDashboard from '../../../modules/dashboard/pages/admin-dashboard'
+import AdminLayout from '../../layouts/admin-layout'
 
 const UserRoutes = () => {
 
@@ -129,6 +132,11 @@ const UserRoutes = () => {
             element={<KycVerificationPage />}
           />
 
+        </Route>
+      </Route>
+      <Route element={<ProtectedUser allowedRole='admin' />}>
+        <Route element={<AdminLayout />}>
+          <Route path='/admin' element={<AdminDashboard />} />
         </Route>
       </Route>
 
