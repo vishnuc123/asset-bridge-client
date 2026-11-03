@@ -1,10 +1,11 @@
 
 import UserListingPage from '../../user-management/pages/userListingPage'
+import AdminSideBar from '../components/sidebar/AdminSideBar'
 
 const AdminDashboard = () => {
     return (
-        <section className="w-full min-h-screen bg-white text-black">
-            <div className="w-full h-screen md:h-screen lg:h-screen overflow-x-auto">
+        <section className="w-full">
+            <div className="w-full">
                 <UserListingPage />
             </div>
         </section>

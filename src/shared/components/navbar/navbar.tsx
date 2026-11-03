@@ -37,8 +37,7 @@ const Navbar = () => {
         
     }
     return (
-        <div className=' h-16 md:h-20  fixed top-5 left-1/2 -translate-x-1/2
-w-[95%] md:w-[90%] lg:w-[80%] flex justify-center items-center backdrop-blur-xl rounded-full shadow-md z-999'>
+        <div className=' fixed top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm'>
             <motion.nav
                 initial={{ y: -100, opacity: 0, scale: 1.5 }}
                 animate={{ y: 0, opacity: 1, scale: 1 }}

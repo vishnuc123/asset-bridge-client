@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useGetUser } from '../hooks/useGetUser'
+import { FiEdit, FiEdit2 } from 'react-icons/fi'
+import { FiltersAndSearch } from './FiltersAndSearch'
 
 const Headers = [
   {
@@ -30,10 +32,14 @@ const Headers = [
     key: "activeRole",
     label: "activerole"
   },
-  // {
-  //   key: "isBlocked",
-  //   label: "isblocked"
-  // },
+  {
+    key: "isBlocked",
+    label: "isblocked"
+  },
+  {
+    key: "actions",
+    label: "actions"
+  }
 
 ]
 
@@ -58,14 +64,14 @@ const UserTable = () => {
 
 
   return (
-    <div >
-      user table
-      <div className='flex justify-start pt-10 mt-10 ml-5'>
-        <table className='w-full h-screen'>
-          <thead className='bg-gray-50'>
+    <div className='bg-gray-10'>
+      <div className='w-full'>
+        <br></br>
+        <table className='w-full'>
+          <thead className='bg-gray-50 text-center'>
             <tr>
               {Headers.map((head, index) => (
-                <th key={index} className='p-3 font-semibold text-xl tracking-wide'>
+                <th key={head.key} className='p-3 font-semibold text-xl tracking-wide'>
                   <span>{head.label}</span>
                 </th>
               ))}
@@ -73,10 +79,23 @@ const UserTable = () => {
           </thead>
           <tbody>
             {result.userDetails.map((row, index) => (
-              <tr key={index}>
+              <tr key={index} className='bg-slate-100 hover:bg-slate-300'>
                 {Headers.map((header, index) => {
-                  return <td key={index}>{row[header.key]}</td>
+                  const renderValue = row[header.key]
+                  if (typeof renderValue === "boolean") {
+                    return <td key={header.key} className='text-center border-b-1 p-3'>{renderValue ? <span className=' bg-rose-100 text-red-500'>Blocked</span> : <span className='bg-emerald-100 text-green-500'>unblocked</span>}</td>
+                  } else if (header.key === "actions") {
+                    return (
 
+                      <td key={header.key} className='text-center border-b-1 p-3'> <button className='text-black-500 hover:text-white hover:bg-black hover:scale-120 p-1 transition-colors'>
+                        <FiEdit className='w-5 h-5' />View And Edit
+                      </button></td>
+
+
+                    )
+                  } else {
+                    return <td key={header.key} className='text-center border-b-1 p-3'>{renderValue}</td>
+                  }
                 })}
               </tr>
             ))}
@@ -85,7 +104,7 @@ const UserTable = () => {
       </div>
       <div className='flex justify-center p-3 text-2xl text-center gap-5'>
         <button className='bg-gray-200 hover:bg-red-300'>prev</button>
-        {result.pageDetails.totalDocuments > 10 ? Array.from({ length: Math.ceil(result.pageDetails.totalDocuments / LIMIT) }, (_, i) => <button onClick={() => setCurrentPage(i + 1)} className='bg-gray-200 hover:bg-green-300' key={i}>{i + 1}</button>) : null}
+        {result.pageDetails.totalDocuments > 10 ? Array.from({ length: Math.ceil(result.pageDetails.totalDocuments / LIMIT) }, (_, i) => <button onClick={() => setCurrentPage(i + 1)} className='bg-gray-200 hover:bg-green-300 w-10 rounded-lg' key={i}>{i + 1}</button>) : null}
         <button className='bg-gray-200 hover:bg-green-300'>next</button>
       </div>
     </div>
