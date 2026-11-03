@@ -7,5 +7,13 @@ export interface IFilterState {
 
 export interface IFilterAndSearchProps {
     filters: IFilterState,
-    setFilters: React.Dispatch<React.SetStateAction<IFilterState>>
+    setFilters: React.Dispatch<React.SetStateAction<IFilterState>>,
+    onSearch : () => void
 }
+
+// export interface IUserTableProps{
+//     filters:IFilterState,
+//     isLoading:Boolean,
+//     isError:Boolean,
+//     data:
+// }

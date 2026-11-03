@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import type { IFilterAndSearchProps, IFilterState } from "../../../shared/interface/CommonInterfaces/IFilterState"
 import { useDebounce } from "../../../shared/Hooks/useDebounce"
 
-export const FiltersAndSearch = ({ filters, setFilters }: IFilterAndSearchProps) => {
+export const FiltersAndSearch = ({ filters, setFilters, onSearch }: IFilterAndSearchProps) => {
     const [searchTerm, setSearchTerm] = useState(filters.search ?? "")
     const debouncedValue = useDebounce(searchTerm, 500)
     useEffect(() => {
@@ -32,6 +32,7 @@ export const FiltersAndSearch = ({ filters, setFilters }: IFilterAndSearchProps)
                 className='border rounded-full px-3 py-3 flex-1 bg-white'
                 value={searchTerm}
                 onChange={handleChange}
+                onClick={onSearch}
                 placeholder='Search'
             />
             <button className="rounded-full p-4 bg-gray-300 hover:bg-gray-500">search</button>

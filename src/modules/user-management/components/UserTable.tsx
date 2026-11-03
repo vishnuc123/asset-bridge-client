@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useGetUser } from '../hooks/useGetUser'
 import { FiEdit, FiEdit2 } from 'react-icons/fi'
 import { FiltersAndSearch } from './FiltersAndSearch'
+import type { IFilterState } from '../../../shared/interface/CommonInterfaces/IFilterState'
 
 const Headers = [
   {
@@ -47,16 +48,16 @@ const Headers = [
 //   {}
 // ]
 
-const UserTable = () => {
+const UserTable: React.FC<{ filters: IFilterState, isSearchClicked: boolean }> = ({ filters, isSearchClicked }) => {
   const PAGE = 1
   const LIMIT = 10
   const [currentPage, setCurrentPage] = useState(1)
-  const { isLoading, isError, isPending, data } = useGetUser(currentPage, LIMIT)
+  const { isLoading, isError, data } = useGetUser(currentPage, LIMIT, filters, isSearchClicked)
   if (isLoading) return <>loading userss...</>
   if (isError) return <>failed to fetch users</>
   // const usersData = data.data || []
+  console.log("data", data)
   const result = data.data
-  console.log("data", result)
 
 
   // console.log("all users data from the backend", data)
